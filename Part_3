@@ -1,0 +1,40 @@
+# ---- Aktuelle Zeit holen ----
+new_time = time.time()        # aktuelle Zeit holen
+
+# ---- Prüfen: Zeit abgelaufen? ----
+if new_time - start_time >= 11:   # prüfen ob 11 Sekunden vorbei sind
+    win = Label(0, 0, 500, 500, LIGHT_RED)     # rotes Fenster erstellen
+    win.set_text("Time's up!!!", 60, DARK_BLUE) # Text setzen
+    win.draw(110, 180)                         # Text anzeigen
+    break                                      # Spiel beenden
+
+
+# ---- Prüfen: Ist 1 Sekunde vergangen? ----
+if int(new_time) - int(cur_time) == 1:   # prüfen ob 1 Sekunde vergangen ist
+    timer.set_text(str(int(new_time - start_time)), 40, DARK_BLUE) # Zeittext setzen
+    timer.draw(0, 0)                                           # Timer anzeigen
+    cur_time = new_time                                        # alte Zeit aktualisieren
+
+
+# ---- Prüfen: Spieler hat gewonnen? ----
+if points >= 5:                               # prüfen ob Punkte >= 5
+    win = Label(0, 0, 500, 500, LIGHT_GREEN)  # grünes Fenster erstellen
+    win.set_text("You won!!!", 60, DARK_BLUE) # Gewinntext setzen
+    win.draw(140, 180)                        # Text anzeigen
+
+    # ---- Ergebniszeit anzeigen ----
+    resul_time = Label(90, 230, 250, 250, LIGHT_GREEN)  # Bereich für Zeit
+    resul_time.set_text("Completion time: " + str(int(new_time - start_time)) + " sec", 40, DARK_BLUE) # Zeittext
+    resul_time.draw(0, 0)                              # Zeit anzeigen
+
+    break                                               # Spiel beenden
+
+
+# ---- Bildschirm aktualisieren ----
+pygame.display.update()     # Bildschirm aktualisieren
+
+# ---- Spielgeschwindigkeit steuern ----
+clock.tick(40)              # Spiel läuft mit 40 FPS
+
+# ---- Letztes Bildschirmupdate ----
+pygame.display.update()     # Bildschirm erneut aktualisieren
